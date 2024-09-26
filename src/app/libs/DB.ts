@@ -17,10 +17,20 @@ export interface User {
   username: string;
   password: string;
   role: "ADMIN" | "SUPER_ADMIN";
+
+}
+export interface Payload {
+  username : string;
+  role: "ADMIN" | "SUPER_ADMIN";
 }
 
+export interface tDB{
+  rooms : Room[];
+  messages : Message[];
+  users : User[];
+}
 
-const originalDB = {
+const originalDB:tDB = {
   rooms: [
     {
       roomId: "okhkUzffzCGMqtfC1uv6x",

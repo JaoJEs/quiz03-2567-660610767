@@ -1,12 +1,14 @@
-import { DB, readDB, writeDB } from "@/app/libs/DB";
+import { DB, readDB, writeDB, Payload } from "@/app/libs/DB";
 import { checkToken } from "@/app/libs/checkToken";
 import { nanoid } from "nanoid";
-import { NextResponse } from "next/server";
+import { NextResponse , NextRequest } from "next/server";
 
-export const GET = async (request) => {
+export const GET = async (request:NextRequest) => {
   readDB();
   const roomId = request.nextUrl.searchParams.get("roomId");
+
   const roomResult = DB.rooms.find((r) => r.roomId === roomId);
+
   if (!roomResult)
     return NextResponse.json(
       {
@@ -24,7 +26,7 @@ export const GET = async (request) => {
   });
 };
 
-export const POST = async (request) => {
+export const POST = async (request:NextRequest) => {
   readDB();
   const body = await request.json();
   const { roomId, messageText } = body;
@@ -53,7 +55,7 @@ export const POST = async (request) => {
   });
 };
 
-export const DELETE = async (request) => {
+export const DELETE = async (request:NextRequest) => {
   const payload = checkToken();
   const body = await request.json();
   const { messageId } = body;

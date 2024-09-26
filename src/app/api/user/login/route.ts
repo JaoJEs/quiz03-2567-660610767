@@ -1,15 +1,15 @@
 import jwt from "jsonwebtoken";
 
-import { DB, readDB } from "@/app/libs/DB";
-import { NextResponse } from "next/server";
+import { DB, readDB , User } from "@/app/libs/DB";
+import { NextResponse , NextRequest } from "next/server";
 
-export const POST = async (request) => {
+export const POST = async (request:NextRequest) => {
   readDB();
   const body = await request.json();
   const { username, password } = body;
 
   const user = DB.users.find(
-    (user) => user.username === username && user.password === password
+    (user:User) => user.username === username && user.password === password
   );
 
   if (!user)
@@ -23,7 +23,7 @@ export const POST = async (request) => {
 
   const token = jwt.sign(
     { username, role: user.role },
-    process.env.JWT_SECRET,
+    secret,
     { expiresIn: "8h" }
   );
 

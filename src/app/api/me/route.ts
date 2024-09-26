@@ -4,6 +4,6 @@ export const GET = async () => {
   return NextResponse.json({
     ok: true,
     fullName: "Niphitpon Thosap",
-    studentId: "660610767",
+    studentId: "6606107677777",
   });
 };

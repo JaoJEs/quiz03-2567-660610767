@@ -1,7 +1,7 @@
-import { DB, readDB, writeDB } from "@lib/DB";
-import { checkToken } from "@lib/checkToken";
+import { DB, readDB, writeDB } from "@/app/libs/DB";
+import { checkToken } from "@/app/libs/checkToken";
 import { nanoid } from "nanoid";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export const GET = async (request) => {
   readDB();
@@ -87,4 +87,3 @@ export const DELETE = async (request) => {
     message: "Message has been deleted",
   });
 };
-

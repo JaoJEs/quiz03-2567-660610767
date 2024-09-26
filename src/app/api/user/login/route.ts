@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 
-import { DB, readDB } from "@lib/DB";
-import { NextRequest, NextResponse } from "next/server";
+import { DB, readDB } from "@/app/libs/DB";
+import { NextResponse } from "next/server";
 
-export const POST = async (request: NextRequest) => {
+export const POST = async (request) => {
   readDB();
   const body = await request.json();
   const { username, password } = body;
@@ -20,11 +20,12 @@ export const POST = async (request: NextRequest) => {
       },
       { status: 400 }
     );
-  
+
   const token = jwt.sign(
-    {username, role: user.role},
+    { username, role: user.role },
     process.env.JWT_SECRET,
-    {expiresIn : "8h"}
+    { expiresIn: "8h" }
   );
+
   return NextResponse.json({ ok: true, token });
 };

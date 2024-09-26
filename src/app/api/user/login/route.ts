@@ -22,7 +22,7 @@ export const POST = async (request: NextRequest) => {
     );
   
   const token = jwt.sign(
-    {username, role: userAgent.role},
+    {username, role: user.role},
     process.env.JWT_SECRET,
     {expiresIn : "8h"}
   );
